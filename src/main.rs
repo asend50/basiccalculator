@@ -26,20 +26,28 @@ fn window_conf() -> Conf {
     }
 }
 
-fn add(num1: f64, num2: f64) -> f64 {
-    num1 + num2
+fn add(num1: f64, num2: f64, lbl_answer: &mut Label) -> f64 {
+    let result = num1 + num2;
+    lbl_answer.set_text(&format!("{}", result).to_string());
+    result
 }
 
-fn subtract(num1: f64, num2: f64) -> f64 {
-    num1 - num2
+fn subtract(num1: f64, num2: f64, lbl_answer: &mut Label) -> f64 {
+    let result = num1 - num2;
+    lbl_answer.set_text(&format!("{}", result).to_string());
+    result
 }
 
-fn multiply(num1: f64, num2: f64) -> f64 {
-    num1 * num2
+fn multiply(num1: f64, num2: f64, lbl_answer: &mut Label) -> f64 {
+    let result = num1 * num2;
+    lbl_answer.set_text(&format!("{}", result).to_string());
+    result
 }
 
-fn divide(num1: f64, num2: f64) -> f64 {
-    num1 / num2
+fn divide(num1: f64, num2: f64, lbl_answer: &mut Label) -> f64 {
+    let result = num1 / num2;
+    lbl_answer.set_text(&format!("{}", result).to_string());
+    result
 }
 
 #[macroquad::main(window_conf)]
@@ -71,64 +79,51 @@ async fn main() {
         }
 
         if btn_add.click() {
-            let _num1: f64 = txt_num1.get_text().trim().parse().unwrap_or(0.0);
-            let _num2: f64 = txt_num2.get_text().trim().parse().unwrap_or(0.0);
             let num1 = txt_num1.get_text().parse::<f64>();
             let num2 = txt_num2.get_text().parse::<f64>();
             if let (Ok(num1), Ok(num2)) = (num1, num2) {
-               
-                lbl_answer.set_text(&format!("= {}", add(num1, num2)));
+                add(num1, num2, &mut lbl_answer);
             } else {
                 lbl_answer.set_text("Invalid");
             }
         }
-        
+
 
         if btn_subtract.click() {
-            let _num1: f64 = txt_num1.get_text().trim().parse().unwrap_or(0.0);
-            let _num2: f64 = txt_num2.get_text().trim().parse().unwrap_or(0.0);
             let num1 = txt_num1.get_text().parse::<f64>();
             let num2 = txt_num2.get_text().parse::<f64>();
             if let (Ok(num1), Ok(num2)) = (num1, num2) {
-               
-                lbl_answer.set_text(&format!("= {}", subtract(num1, num2)));
+                subtract(num1, num2, &mut lbl_answer);
             } else {
                 lbl_answer.set_text("Invalid");
             }
         }
+
 
         if btn_multiply.click() {
-            let _num1: f64 = txt_num1.get_text().trim().parse().unwrap_or(0.0);
-            let _num2: f64 = txt_num2.get_text().trim().parse().unwrap_or(0.0);
             let num1 = txt_num1.get_text().parse::<f64>();
             let num2 = txt_num2.get_text().parse::<f64>();
             if let (Ok(num1), Ok(num2)) = (num1, num2) {
-               
-                lbl_answer.set_text(&format!("= {}", multiply(num1, num2)));
+                multiply(num1, num2, &mut lbl_answer);
             } else {
                 lbl_answer.set_text("Invalid");
             }
         }
 
-        
 
         if btn_divide.click() {
-            let _num1: f64 = txt_num1.get_text().trim().parse().unwrap_or(0.0);
-            let _num2: f64 = txt_num2.get_text().trim().parse().unwrap_or(0.0);
             let num1 = txt_num1.get_text().parse::<f64>();
             let num2 = txt_num2.get_text().parse::<f64>();
             if let (Ok(num1), Ok(num2)) = (num1, num2) {
-               
-                lbl_answer.set_text(&format!("= {}", divide(num1, num2)));
+                divide(num1, num2, &mut lbl_answer);
             } else {
                 lbl_answer.set_text("Invalid");
             }
         }
-
         txt_num1.draw();
         txt_num2.draw();
         lbl_answer.with_border(BLACK, 3.0).with_fixed_size(153.0, 53.0).draw();
         lbl_help.draw();
         next_frame().await;
-    }}
-    
+    }
+}
