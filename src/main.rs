@@ -72,7 +72,6 @@ async fn main() {
 
     loop {
         clear_background(WHITE);
-        draw_grid(50.0, BLACK);
 
         if btn_exit.click() {
             break;
@@ -95,6 +94,15 @@ async fn main() {
             if let (Ok(num1), Ok(num2)) = (num1, num2) {
                 subtract(num1, num2, &mut lbl_answer);
             } else {
+        if btn_subtract.click() {
+            let num1 = txt_num1.get_text().parse::<f64>();
+            let num2 = txt_num2.get_text().parse::<f64>();
+            if let (Ok(num1), Ok(num2)) = (num1, num2) {
+                subtract(num1, num2, &mut lbl_answer);
+            } else {
+                lbl_answer.set_text("Invalid");
+            }
+        }
                 lbl_answer.set_text("Invalid");
             }
         }
