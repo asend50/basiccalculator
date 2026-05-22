@@ -6,7 +6,6 @@ Program Details: <The purpose of this program is to allow the user to type in tw
 
 mod modules;
 
-use crate::modules::grid::draw_grid;
 use crate::modules::label::Label;
 use crate::modules::text_button::TextButton;
 use crate::modules::text_input::TextInput;
